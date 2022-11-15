@@ -60,6 +60,10 @@ body {
   margin: 0.5rem;
 }
 
+h1,
+.card:hover {
+  cursor: pointer;
+}
 .content {
   position: absolute;
   width: 100%;
@@ -138,17 +142,6 @@ header {
   background-color: var(--colorSecundario);
 }
 
-button {
-  width: min-content;
-  height: min-content;
-
-  /* align-self: flex-end; */
-  background-color: #1b2430;
-  color: var(--colorSecundario);
-  border: 1px solid;
-  border-radius: 4px;
-}
-
 li {
   list-style: none;
   color: var(--color-letra);
@@ -161,4 +154,22 @@ h1 {
   color: var(--color-letra);
   font-family: var(--font);
   /* text-shadow: 1px 1px var(--sombra); */
+}
+/* //////////////////////////////////// */
+#modal {
+  background-color: rgba(128, 128, 128, 0.616);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal div {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
 }

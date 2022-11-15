@@ -5,6 +5,8 @@ const backCard = document.querySelectorAll(".back");
 const puntos = document.querySelector(".puntos");
 const body = document.querySelector("body");
 const h1 = document.querySelector("h1");
+const modal = document.createElement("div");
+const botonModal = document.querySelector(".modal");
 //Array de emojis para las dos versiones
 let emojisArcade = [
   {
@@ -190,27 +192,46 @@ function comprobarPareja() {
 //////////////////////////////////////////////////////
 //Se encarga de que al llegar 8 matches (que es el numero total de pajeras)
 function terminarJuego() {
-  if (numberOfMatches == 8) {
-    alert(`Has terminado el juego con un total de ${puntuacion}`),
-      //les elimina el atributo para que den la vuelta.
-      cards.forEach((card) => {
-        card.classList.remove("flipped");
-      });
-    resetGame();
+  if (numberOfMatches == 1) {
+    endGame();
   }
 }
 /////////////////////////////////////////////////
 //RESETEO DEL JUEGO
 function resetGame() {
   //Por cada carta
-  cards.forEach((card) => {
-    //les elimina el atributo para que den la vuelta.
-    card.classList.remove("flipped");
-  });
+  setTimeout(
+    () =>
+      cards.forEach((card) => {
+        //les elimina el atributo para que den la vuelta.
+        card.classList.remove("flipped");
+      }),
+    2000
+  );
   //restauramos todos los valores a cero
   flippedCards = [];
   flippedElement = [];
   puntuacion = 0;
-  //Recargamos la pagina (de momento es la solucion a muchos de los errores, asi nos los evetamos, )
+  //Recargamos la pagina (de momento es la solucion a muchos de los errores, asi nos los evetamos de momento)
   location.reload();
+}
+
+///////////////////////////////////
+//Lanzar un modal cuando termine el juego
+
+function endGame() {
+  modal.setAttribute("id", "modal");
+  modal.innerHTML = `
+  <div>
+  <h2>Fin del Juego</h2>
+  <p></p>
+  <button>Jugar de nuevo</button>
+  </div>
+  `;
+
+  body.append(modal);
+  modal.addEventListener("click", () => {
+    modal.remove();
+    resetGame();
+  });
 }
