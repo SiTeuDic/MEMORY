@@ -5,6 +5,9 @@ const backCard = document.querySelectorAll(".back");
 const puntos = document.querySelector(".puntos");
 const body = document.querySelector("body");
 const h1 = document.querySelector("h1");
+const modal = document.createElement("div");
+const parrafoModal = document.querySelector("div p");
+const botonModal = document.querySelector(".botonModal");
 //Array de emojis para las dos versiones
 let emojisArcade = [
   {
@@ -111,18 +114,38 @@ function createRandomArrayFromOther(array, maxLength = 8) {
   //Devolvemos el array aleatorio
   return randomArray;
 }
-//////////////////////////////////////////////////////
+//////////////////////POR TERMiNAR ////////////////////////////////
 //Cambiar de estilo
-//[...]
+/* [1. si la partia aun no ha empezado no pasa nada
+  2. si la partia ha comnzado que salga un modal con dos opciones, "Si cambias ahora perderas todos los avances del juego"] 
+  3.reset del juego + cambios de emojis*/
 h1.addEventListener("click", Mode);
 
 function Mode(e) {
-  body.classList.toggle("arcade");
-}
-if (body.classList.contains("arcade")) {
-  emojisClassic = emojisArcade;
-}
+  if (flippedCards.length || flippedElement.length) {
+    console.log("holi");
+    modal.setAttribute("id", "modal");
+    modal.innerHTML = `
+    <div>
+    <h2>¿SEGURO QUE QUIERES CAMBIR DE MODO?</h2>
+    <p>Si cambias ahora perderas el progreso del juego</p>
+    <button class="botonModal">Cambiar de modo</button>
+    <button>Seguir jugando
+</button>
+    </div>
+    `;
 
+    body.append(modal);
+    botonModal.addEventListener("click", () => {
+      console.log("holi");
+      modal.remove();
+      body.classList.toggle("arcade");
+      resetGame();
+    });
+  } else {
+    body.classList.toggle("arcade");
+  }
+}
 //////////////////////////////////////
 //Colocar cada emoji en su caja.
 //Recorremos el array de de randomEmojisPar y lo metemos en una casilla
@@ -155,7 +178,6 @@ function reveal(event) {
 for (const card of cards) {
   card.addEventListener("click", reveal);
 }
-
 //////////////////////////////////////////////////////////////////////
 //
 function comprobarPareja() {
@@ -169,12 +191,8 @@ function comprobarPareja() {
     numberOfMatches++;
     //añadimos un punto a intentos
     puntos.textContent = `Intentos:  ${puntuacion} `;
-    for (const element of flippedElement) {
-     element.classList.add("move");
-    }
     flippedCards.length = 0;
     flippedElement = [];
-    
   } else {
     //Si no son iguales...
     setTimeout(() => {
@@ -186,45 +204,56 @@ function comprobarPareja() {
       puntuacion++;
       //añadimos un punto a intentos
       puntos.textContent = `INTENTOS: ${puntuacion} `;
-      flippedElement = [];
       //reseteamos la lista a 0 elementos
       flippedCards.length = 0;
       //Y todo esto se hace despues de un segundo
-    }, 1000);
+    }, 500);
   }
 }
 //////////////////////////////////////////////////////
 //Se encarga de que al llegar 8 matches (que es el numero total de pajeras)
 function terminarJuego() {
   if (numberOfMatches == 8) {
-    alert(`Has terminado el juego con un total de ${puntuacion} intentos`),
-      //les elimina el atributo para que den la vuelta.
-      cards.forEach((card) => {
-        card.classList.remove("flipped");
-      });
-    resetGame();
+    endGame();
   }
 }
 /////////////////////////////////////////////////
 //RESETEO DEL JUEGO
 function resetGame() {
   //Por cada carta
-  cards.forEach((card) => {
-    //les elimina el atributo para que den la vuelta.
-    card.classList.remove("flipped");
-  });
+  setTimeout(
+    () =>
+      cards.forEach((card) => {
+        //les elimina el atributo para que den la vuelta.
+        card.classList.remove("flipped");
+      }),
+    500
+  );
+
   //restauramos todos los valores a cero
   flippedCards = [];
   flippedElement = [];
   puntuacion = 0;
-  //Recargamos la pagina (de momento es la solucion a muchos de los errores, asi nos los evetamos, )
-  location.reload();
 }
 
-//MOVIMIENTO CARTA AMBAS COINCIDEN
+//////////////HAY QUE DARLE ESTILOS/////////////////////
+//Lanzar un modal cuando termine el juego
 
-function anadirMovimiento(e) {
-  e.classList.add("move")
-console.log(hola);
+function endGame() {
+  modal.setAttribute("id", "modal");
+  modal.innerHTML = `
+  <div>
+  <h2>Fin del Juego</h2>
+  <p>INTENTOS: ${puntuacion} TIEMPO: 00:00s</p>
+  <button>Jugar de nuevo
+</button>
+
+  </div>
+  `;
+
+  body.append(modal);
+  modal.addEventListener("click", () => {
+    modal.remove();
+    resetGame();
+  });
 }
-
