@@ -5,8 +5,6 @@ const backCard = document.querySelectorAll(".back");
 const puntos = document.querySelector(".puntos");
 const body = document.querySelector("body");
 const h1 = document.querySelector("h1");
-const tiempo = document.querySelector(".tiempo");
-
 //Array de emojis para las dos versiones
 let emojisArcade = [
   {
@@ -78,9 +76,6 @@ let emojisClassic = [
 ];
 
 //Declaracion de las variables, marcadores...
-let temporizador = false;
-let timer = 0;
-let tiempoRegresivo = null;
 // Guardamos las cartas seleccionadas en un array
 let flippedCards = [];
 // Guardamos el elemento completo, [...]
@@ -93,19 +88,14 @@ let numberOfMatches = 0;
 //Declaramos el array aleatorio a partir de los arrays emojisArcade, emojisClassic, usando la función expresada más abajo.
 const randomEmoji = createRandomArrayFromOther(emojisClassic);
 
-console.log(randomEmoji);
-
 //De el array creado lo metemos en uno nuevo duplicando todos los elementos para tener las parejas
 const randomEmojiPar = [...randomEmoji, ...randomEmoji];
-
-console.log(randomEmojiPar);
 
 //////////////////////////////////////////////////////////////
 //array creando un array aleatorio a parter de cualquier otro, recive dos paramatros el array que queremos desordenar y el lago de el que nos devuelve, por defecto 8
 
 function createRandomArrayFromOther(array, maxLength = 8) {
   const clonedArray = [...array];
-  console.log(clonedArray); //Diango
   const randomArray = [];
 
   for (let i = 0; i < maxLength; i++) {
@@ -113,9 +103,6 @@ function createRandomArrayFromOther(array, maxLength = 8) {
     const randomIndex = Math.floor(Math.random() * clonedArray.length);
     //Guardamos el elemento en la posicion generada aleatoriamente antes
     const randomItem = clonedArray[randomIndex];
-
-    console.log(randomItem); //Diango
-
     //lo metemos en el nuevo array
     randomArray.push(randomItem);
     //y lo eliminamos de el array clonado
@@ -146,14 +133,6 @@ for (let i = 0; i < randomEmojiPar.length; i++) {
 //////////////////////////////////////
 //Funcion PRINCIPAL
 function reveal(event) {
-  //tiempo
-
-  if (temporizador == false) {
-    contarTiempo();
-    temporizador = true;
-  }
-
-  /////////////////////////////////////////
   const card = event.target.closest(".card");
 
   //si Carta y el largo del flippedcards es menor que 2 y carta NO contiene la clase flipped
@@ -176,6 +155,7 @@ function reveal(event) {
 for (const card of cards) {
   card.addEventListener("click", reveal);
 }
+
 //////////////////////////////////////////////////////////////////////
 //
 function comprobarPareja() {
@@ -189,8 +169,12 @@ function comprobarPareja() {
     numberOfMatches++;
     //añadimos un punto a intentos
     puntos.textContent = `Intentos:  ${puntuacion} `;
+    for (const element of flippedElement) {
+     element.classList.add("move");
+    }
     flippedCards.length = 0;
     flippedElement = [];
+    
   } else {
     //Si no son iguales...
     setTimeout(() => {
@@ -202,6 +186,7 @@ function comprobarPareja() {
       puntuacion++;
       //añadimos un punto a intentos
       puntos.textContent = `INTENTOS: ${puntuacion} `;
+      flippedElement = [];
       //reseteamos la lista a 0 elementos
       flippedCards.length = 0;
       //Y todo esto se hace despues de un segundo
@@ -212,9 +197,7 @@ function comprobarPareja() {
 //Se encarga de que al llegar 8 matches (que es el numero total de pajeras)
 function terminarJuego() {
   if (numberOfMatches == 8) {
-    alert(
-      `Has terminado el juego con un total de ${puntuacion}`` y tu tiempo es de ${timer} segundos`
-    ),
+    alert(`Has terminado el juego con un total de ${puntuacion} intentos`),
       //les elimina el atributo para que den la vuelta.
       cards.forEach((card) => {
         card.classList.remove("flipped");
@@ -238,16 +221,10 @@ function resetGame() {
   location.reload();
 }
 
-////////////////////TIEMPO
+//MOVIMIENTO CARTA AMBAS COINCIDEN
 
-function contarTiempo() {
-  tiempoRegresivo = setInterval(() => {
-    timer++;
-    tiempo.innerHTML = `TIEMPO: ${timer} SEGUNDOS`;
-    // if (timer == 0) {
-    //   clearInterval(tiempoRegresivo);
-    //   alert(`tu tiempo ha terminado y tus intentos fueron ${puntuacion}`); //${puntuacion}`);
-    //   resetGame(); // resetgame
-    //}
-  }, 1000);
+function anadirMovimiento(e) {
+  e.classList.add("move")
+console.log(hola);
 }
+
