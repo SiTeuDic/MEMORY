@@ -10,6 +10,7 @@ button {
   height: 100%;
   width: 100%;
 }
+
 /* 
 html {
   --colorfondo: #f2deba;
@@ -60,10 +61,6 @@ body {
   margin: 0.5rem;
 }
 
-h1,
-.card:hover {
-  cursor: pointer;
-}
 .content {
   position: absolute;
   width: 100%;
@@ -155,7 +152,8 @@ h1 {
   font-family: var(--font);
   /* text-shadow: 1px 1px var(--sombra); */
 }
-/* //////////////////////////////////// */
+
+/* //////////////////////MODAL////////////////////////// */
 #modal {
   background-color: rgba(128, 128, 128, 0.616);
   position: fixed;
@@ -164,12 +162,61 @@ h1 {
   left: 0;
   right: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  color: var(--color-letra);
 }
 
 #modal div {
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font2);
+  font-weight: bold;
+  background-color: var(--colorSecundario);
   padding: 2rem;
   border-radius: 1rem;
+  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.39);
+}
+
+/* #modal button {
+  font-family: var(--font2);
+  color: #19282f;
+  font-weight: bold;
+  border-radius: 1rem;
+  align-self: center;
+  margin-top: 1rem;
+  width: 80%;
+  height: 3rem;
+  border-color: #6aa4aa;
+}
+
+#modal button:hover {
+  color: #ffefd6; 
+  background-color: azure;
+}
+ */
+
+#modal button {
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: white;
+  background-color: black;
+  border-radius: 1rem;
+  box-shadow: 0px 3px 0px rgb(68, 66, 66);
+  line-height: 35px;
+}
+
+#modal button:hover {
+  background-color: rgb(78, 64, 64);
+}
+
+#modal button:active {
+  background-color: black;
+  box-shadow: 0 1px #666;
+  transform: translateY(5px);
 }
