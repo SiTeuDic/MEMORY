@@ -5,9 +5,8 @@ const backCard = document.querySelectorAll(".back");
 const puntos = document.querySelector(".puntos");
 const body = document.querySelector("body");
 const h1 = document.querySelector("h1");
-const modal = document.createElement("div");
-const parrafoModal = document.querySelector("div p");
-const botonModal = document.querySelector(".botonModal");
+const tiempo = document.querySelector(".tiempo");
+
 //Array de emojis para las dos versiones
 let emojisArcade = [
   {
@@ -79,6 +78,9 @@ let emojisClassic = [
 ];
 
 //Declaracion de las variables, marcadores...
+let temporizador = false;
+let timer = 0;
+let tiempoRegresivo = null;
 // Guardamos las cartas seleccionadas en un array
 let flippedCards = [];
 // Guardamos el elemento completo, [...]
@@ -91,14 +93,19 @@ let numberOfMatches = 0;
 //Declaramos el array aleatorio a partir de los arrays emojisArcade, emojisClassic, usando la función expresada más abajo.
 const randomEmoji = createRandomArrayFromOther(emojisClassic);
 
+console.log(randomEmoji);
+
 //De el array creado lo metemos en uno nuevo duplicando todos los elementos para tener las parejas
 const randomEmojiPar = [...randomEmoji, ...randomEmoji];
+
+console.log(randomEmojiPar);
 
 //////////////////////////////////////////////////////////////
 //array creando un array aleatorio a parter de cualquier otro, recive dos paramatros el array que queremos desordenar y el lago de el que nos devuelve, por defecto 8
 
 function createRandomArrayFromOther(array, maxLength = 8) {
   const clonedArray = [...array];
+  console.log(clonedArray); //Diango
   const randomArray = [];
 
   for (let i = 0; i < maxLength; i++) {
@@ -106,6 +113,9 @@ function createRandomArrayFromOther(array, maxLength = 8) {
     const randomIndex = Math.floor(Math.random() * clonedArray.length);
     //Guardamos el elemento en la posicion generada aleatoriamente antes
     const randomItem = clonedArray[randomIndex];
+
+    console.log(randomItem); //Diango
+
     //lo metemos en el nuevo array
     randomArray.push(randomItem);
     //y lo eliminamos de el array clonado
@@ -114,38 +124,18 @@ function createRandomArrayFromOther(array, maxLength = 8) {
   //Devolvemos el array aleatorio
   return randomArray;
 }
-//////////////////////POR TERMiNAR ////////////////////////////////
+//////////////////////////////////////////////////////
 //Cambiar de estilo
-/* [1. si la partia aun no ha empezado no pasa nada
-  2. si la partia ha comnzado que salga un modal con dos opciones, "Si cambias ahora perderas todos los avances del juego"] 
-  3.reset del juego + cambios de emojis*/
+//[...]
 h1.addEventListener("click", Mode);
 
 function Mode(e) {
-  if (flippedCards.length || flippedElement.length) {
-    console.log("holi");
-    modal.setAttribute("id", "modal");
-    modal.innerHTML = `
-    <div>
-    <h2>¿SEGURO QUE QUIERES CAMBIR DE MODO?</h2>
-    <p>Si cambias ahora perderas el progreso del juego</p>
-    <button class="botonModal">Cambiar de modo</button>
-    <button>Seguir jugando
-</button>
-    </div>
-    `;
-
-    body.append(modal);
-    botonModal.addEventListener("click", () => {
-      console.log("holi");
-      modal.remove();
-      body.classList.toggle("arcade");
-      resetGame();
-    });
-  } else {
-    body.classList.toggle("arcade");
-  }
+  body.classList.toggle("arcade");
 }
+if (body.classList.contains("arcade")) {
+  emojisClassic = emojisArcade;
+}
+
 //////////////////////////////////////
 //Colocar cada emoji en su caja.
 //Recorremos el array de de randomEmojisPar y lo metemos en una casilla
@@ -156,6 +146,14 @@ for (let i = 0; i < randomEmojiPar.length; i++) {
 //////////////////////////////////////
 //Funcion PRINCIPAL
 function reveal(event) {
+  //tiempo
+
+  if (temporizador == false) {
+    contarTiempo();
+    temporizador = true;
+  }
+
+  /////////////////////////////////////////
   const card = event.target.closest(".card");
 
   //si Carta y el largo del flippedcards es menor que 2 y carta NO contiene la clase flipped
@@ -207,53 +205,49 @@ function comprobarPareja() {
       //reseteamos la lista a 0 elementos
       flippedCards.length = 0;
       //Y todo esto se hace despues de un segundo
-    }, 500);
+    }, 1000);
   }
 }
 //////////////////////////////////////////////////////
 //Se encarga de que al llegar 8 matches (que es el numero total de pajeras)
 function terminarJuego() {
   if (numberOfMatches == 8) {
-    endGame();
+    alert(
+      `Has terminado el juego con un total de ${puntuacion}`` y tu tiempo es de ${timer} segundos`
+    ),
+      //les elimina el atributo para que den la vuelta.
+      cards.forEach((card) => {
+        card.classList.remove("flipped");
+      });
+    resetGame();
   }
 }
 /////////////////////////////////////////////////
 //RESETEO DEL JUEGO
 function resetGame() {
   //Por cada carta
-  setTimeout(
-    () =>
-      cards.forEach((card) => {
-        //les elimina el atributo para que den la vuelta.
-        card.classList.remove("flipped");
-      }),
-    500
-  );
-
+  cards.forEach((card) => {
+    //les elimina el atributo para que den la vuelta.
+    card.classList.remove("flipped");
+  });
   //restauramos todos los valores a cero
   flippedCards = [];
   flippedElement = [];
   puntuacion = 0;
+  //Recargamos la pagina (de momento es la solucion a muchos de los errores, asi nos los evetamos, )
+  location.reload();
 }
 
-//////////////HAY QUE DARLE ESTILOS/////////////////////
-//Lanzar un modal cuando termine el juego
+////////////////////TIEMPO
 
-function endGame() {
-  modal.setAttribute("id", "modal");
-  modal.innerHTML = `
-  <div>
-  <h2>Fin del Juego</h2>
-  <p>INTENTOS: ${puntuacion} TIEMPO: 00:00s</p>
-  <button>Jugar de nuevo
-</button>
-
-  </div>
-  `;
-
-  body.append(modal);
-  modal.addEventListener("click", () => {
-    modal.remove();
-    resetGame();
-  });
+function contarTiempo() {
+  tiempoRegresivo = setInterval(() => {
+    timer++;
+    tiempo.innerHTML = `TIEMPO: ${timer} SEGUNDOS`;
+    // if (timer == 0) {
+    //   clearInterval(tiempoRegresivo);
+    //   alert(`tu tiempo ha terminado y tus intentos fueron ${puntuacion}`); //${puntuacion}`);
+    //   resetGame(); // resetgame
+    //}
+  }, 1000);
 }
