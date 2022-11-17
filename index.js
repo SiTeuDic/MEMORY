@@ -250,7 +250,7 @@ function resetGame() {
   flippedCards = [];
   flippedElement = [];
   puntuacion = 0;
-  puntos.textContent = `Intentos:  ${puntuacion}`;
+  puntos.textContent = `INTENTOS:  ${puntuacion}`;
 }
 
 //////////////HAY QUE DARLE ESTILOS/////////////////////
@@ -288,3 +288,6 @@ function contarTiempo() {
     //}
   }, 1000);
 }
+
+
+

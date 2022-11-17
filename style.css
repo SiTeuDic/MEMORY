@@ -13,12 +13,14 @@ html {
   --colorDegradadoCartaE: linear-gradient(#0e5e6f, #ffefd6);
   --colorSecundario: #ffefd6;
 } */
+
 html {
   --colorfondo: #ffefd6;
   --colorDegradadoCarta: #0e5d6fc5;
   --colorDegradadoCartaE: #6aa4aa;
   --colorSecundario: #f2deba;
   --color-letra: #19282f;
+  --color-sombra: #ebad4b;
   --table: var(--colorSecundario);
   --font: Major Mono Display;
   --font2: ;
@@ -30,6 +32,7 @@ html {
   --colorSecundario: #006e7f;
   --color-letra: #f8cb2e;
 } */
+/*
 body.arcade {
   --colorfondo: #f55353;
   --colorDegradadoCarta: linear-gradient(#f8b447, #fc6620);
@@ -37,10 +40,12 @@ body.arcade {
   --colorSecundario: #143f6b;
   --color-letra: #f55353;
   --sombra: rgba(255, 255, 255, 0.637);
+  --sombraUlMemory:#21466b;
   --font: nabla;
   --font2: Roboto Slab;
   --table: #e73939d2;
 }
+*/
 
 body {
   display: grid;
@@ -51,25 +56,23 @@ body {
 /* ENCABEZADO*/
 h1 {
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 3rem;
   font-weight: 100;
   color: var(--color-letra);
   font-family: var(--font);
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
   /* text-shadow: 1px 1px var(--sombra); */
 }
 header {
   width: 100%;
   height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: row;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.24);
   border-bottom: 2px solid var(--color-letra);
   background-color: var(--colorSecundario);
 }
+
 
 ul {
   display: flex;
@@ -78,12 +81,30 @@ ul {
   list-style: none;
   color: black;
   font-weight: bold;
-  border: 1px solid var(--colorSecundario);
-  box-shadow: 1px 1px 1px #ebad4b;
+  border: 1.5px solid var(--colorSecundario);
+  box-shadow: 1px 1px 1px var(--color-sombra);
   border-radius: 5px;
   margin: 1rem 0.5rem;
   padding: 0.5rem;
 }
+
+/* UL ARCADE */
+/*
+ul.arcade {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  list-style: none;
+  color: rgb(223, 223, 72);
+  font-weight: bold;
+  border: 1.5px solid  var(--colorSecundario);
+  box-shadow: 1px 1px 2px var(--sombraUlMemory); 
+  border-radius: 5px;
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+}
+
+  */
 
 .tablero {
   display: flex;
@@ -108,7 +129,7 @@ ul {
   border: 1px solid var(--colorSecundario);
   border-radius: 0.5rem;
   background-color: #ffefd6;
-  box-shadow: 1px 1px 1px #ebad4b;
+  box-shadow: 1px 1px 1px var(--color-sombra);
 }
 
 .content {
@@ -205,7 +226,7 @@ button {
   animation-timing-function: ease-in;
   animation-direction: alternate;
   animation-fill-mode: both;
-  animation-delay: 1s;
+  animation-delay: 0.5s;
 }
 
 /* //////////////////////MODAL////////////////////////// */
