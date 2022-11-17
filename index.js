@@ -25,6 +25,11 @@ let puntuacion = 0;
 let numberOfMatches = 0;
 let randomEmoji = createRandomArrayFromOther(emojisArr);
 let randomEmojiPar = [...randomEmoji, ...randomEmoji];
+let nombreSonido = new Audio("/sonidos/pasarcarta.wav");
+let gameOver = new Audio("/sonidos/perdedor.wav");
+let noCoincidenCartas = new Audio("/sonidos/noCoincidenCartas.wav");
+let coincidenCartas = new Audio("/sonidos/win.wav");
+let ganador = new Audio("/sonidos/fuegosArtificiales.wav");
 
 //////////////////////////////////////////////////////////////
 
@@ -100,6 +105,7 @@ function reveal(event) {
 
   if (card && flippedCards.length < 2 && !card.classList.contains("flipped")) {
     card.classList.add("flipped");
+    nombreSonido.play();
     flippedCards.push(card.innerText);
     flippedElement.push(card);
     if (flippedCards.length === 2) {
@@ -130,7 +136,9 @@ function comprobarPareja() {
 
     flippedCards.length = 0;
     flippedElement = [];
+    coincidenCartas.play();
   } else {
+    noCoincidenCartas.play()
     setTimeout(() => {
       flippedElement.forEach((card) => {
         card.classList.remove("flipped");
@@ -148,6 +156,7 @@ function comprobarPareja() {
 //
 function terminarJuego() {
   if (numberOfMatches == 8) {
+    ganador.play();
     modal.setAttribute("id", "modal");
     modal.innerHTML = `
     <div>
