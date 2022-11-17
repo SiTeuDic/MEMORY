@@ -5,7 +5,8 @@ const backCard = document.querySelectorAll(".back");
 const puntos = document.querySelector(".puntos");
 const body = document.querySelector("body");
 const h1 = document.querySelector("h1");
-const tiempo = document.querySelector(".tiempo");
+const segundos = document.querySelector(".segundos");
+const minutos = document.querySelector("#minutos");
 const modal = document.createElement("div");
 const parrafoModal = document.querySelector("div p");
 const botonModal = document.querySelector(".botonModal");
@@ -16,7 +17,7 @@ let emojisArr = ["🌇", "🌉", "🌃", "🌄", "🌅", "🏞", "🎑", "🛤"]
 
 let temporizador = false;
 let timer = 0;
-let tiempoRegresivo = null;
+let tiempoMinSegun = null;
 
 let flippedCards = [];
 let flippedElement = [];
@@ -140,14 +141,12 @@ function comprobarPareja() {
       flippedElement = [];
 
       flippedCards.length = 0;
-
     }, 500);
   }
 }
 //////////////////////////////////////////////////////
 //
 function terminarJuego() {
-
   if (numberOfMatches == 8) {
     modal.setAttribute("id", "modal");
     modal.innerHTML = `
@@ -165,13 +164,11 @@ function terminarJuego() {
       location.reload();
       setTimeout(() => resetGame(), 1000);
     });
-
   }
 }
 /////////////////////////////////////////////////
 
 function resetGame() {
-
   randomEmoji = createRandomArrayFromOther(emojisArr);
   randomEmojiPar = [...randomEmoji, ...randomEmoji];
   flippedCards = [];
@@ -180,7 +177,7 @@ function resetGame() {
   numberOfMatches = 0;
   timer = 0;
   puntos.textContent = `Intentos:  ${puntuacion}`;
-  tiempo.textContent = `TIEMPO: ${timer}s`;
+  tiempo.textContent = `TIEMPO:  ${contadorMinutos} : ${contadorSegundos}`;
 
   setTimeout(
     () =>
@@ -194,13 +191,12 @@ function resetGame() {
 //////////////HAY QUE DARLE ESTILOS/////////////////////
 //Lanzar un modal cuando termine el juego
 
-function contarTiempo() {
-  tiempoRegresivo = setInterval(() => {
-    timer++;
-    tiempo.textContent = `TIEMPO: ${timer}s`;
-  }, 1000);
-
-}
+// function contarTiempo() {
+//   tiempoRegresivo = setInterval(() => {
+//     timer++;
+//     tiempo.textContent = `TIEMPO: ${timer}s`;
+//   }, 1000);
+// }
 
 //////////////HAY QUE DARLE ESTILOS/////////////////////
 //Lanzar un modal cuando termine el juego
@@ -227,16 +223,29 @@ botonModal.addEventListener("click", () => resetGame());
 ////////////////////TIEMPO
 
 function contarTiempo() {
-  tiempoRegresivo = setInterval(() => {
-    timer++;
-    tiempo.textContent = `TIEMPO: ${timer}s`;
-    // if (timer == 0) {
-    //   clearInterval(tiempoRegresivo);
-    //   alert(`tu tiempo ha terminado y tus intentos fueron ${puntuacion}`); //${puntuacion}`);
-    //   resetGame(); // resetgame
-    //}
+  let contadorSegundos = 0;
+  let contadorMinutos = 0;
+
+  if (contadorSegundos < 10) {
+    contadorSegundos = "0" + contadorSegundos;
+  }
+  if (contadorMinutos < 10) {
+    contadorMinutos = "0" + contadorMinutos;
+  }
+
+  tiempoMinSegun = setInterval(() => {
+    if (contadorSegundos == 60) {
+      contadorSegundos = 0;
+      contadorMinutos++;
+      //contadorSegundos = "0" + contadorSegundos;
+      minutos.innerHTML = contadorMinutos;
+      if (contadorMinutos == 0) {
+        contadorMinutos = 0;
+      }
+    }
+    segundos.innerHTML = contadorSegundos;
+    contadorSegundos++;
+
+    segundos.textContent = `TIEMPO: ${contadorMinutos} : ${contadorSegundos}`;
   }, 1000);
 }
-
-
-
