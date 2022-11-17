@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Nabla&family=Outfit:wght@300;400;600&family=Roboto+Slab:wght@500&family=VT323&display=swap");
 
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&family=Open+Sans:wght@300&family=Press+Start+2P&display=swap");
+=======
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&family=Open+Sans:wght@300&family=Press+Start+2P&display=swap');
+>>>>>>> 946400a (sonido de las cartas)
 
 * {
   margin: 0;
