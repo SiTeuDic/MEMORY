@@ -128,7 +128,11 @@ function comprobarPareja() {
     flippedElement = [];
     coincidenCartas.play();
   } else {
+<<<<<<< HEAD
     noCoincidenCartas.play();
+=======
+    noCoincidenCartas.play()
+>>>>>>> 946400a (sonido de las cartas)
     setTimeout(() => {
       flippedElement.forEach((card) => {
         card.classList.remove("flipped");
