@@ -9,6 +9,7 @@ const tiempo = document.querySelector(".tiempo");
 const modal = document.createElement("div");
 const parrafoModal = document.querySelector("div p");
 const botonModal = document.querySelector(".botonModal");
+
 const celda = document.querySelector(".content");
 //Array de emojis
 let emojisArr = ["🌇", "🌉", "🌃", "🌄", "🌅", "🏞", "🎑", "🛤"];
@@ -43,6 +44,7 @@ function createRandomArrayFromOther(array) {
 /* [1. si la partia aun no ha empezado no pasa nada
   2. si la partia ha comnzado que salga un modal con dos opciones, "Si cambias ahora perderas todos los avances del juego"] 
   3.reset del juego + cambios de emojis*/
+
 /* h1.addEventListener("click", Mode);
 
 function Mode(e) {
@@ -69,7 +71,9 @@ function Mode(e) {
   } else {
     body.classList.toggle("arcade");
   }
+
 } */
+
 //////////////////////////////////////
 //Colocar cada emoji en su caja.
 for (let i = 0; i < 16; i++) {
@@ -120,7 +124,9 @@ function comprobarPareja() {
     for (const element of flippedElement) {
       element.classList.add("move");
     }
+
     setTimeout(() => terminarJuego(), 500);
+
     flippedCards.length = 0;
     flippedElement = [];
   } else {
@@ -132,13 +138,16 @@ function comprobarPareja() {
       puntuacion++;
       puntos.textContent = `INTENTOS: ${puntuacion} `;
       flippedElement = [];
+
       flippedCards.length = 0;
+
     }, 500);
   }
 }
 //////////////////////////////////////////////////////
 //
 function terminarJuego() {
+
   if (numberOfMatches == 8) {
     modal.setAttribute("id", "modal");
     modal.innerHTML = `
@@ -156,12 +165,13 @@ function terminarJuego() {
       location.reload();
       setTimeout(() => resetGame(), 1000);
     });
+
   }
 }
 /////////////////////////////////////////////////
 
 function resetGame() {
-  //Por cada carta
+
   randomEmoji = createRandomArrayFromOther(emojisArr);
   randomEmojiPar = [...randomEmoji, ...randomEmoji];
   flippedCards = [];
@@ -189,4 +199,44 @@ function contarTiempo() {
     timer++;
     tiempo.textContent = `TIEMPO: ${timer}s`;
   }, 1000);
+
 }
+
+//////////////HAY QUE DARLE ESTILOS/////////////////////
+//Lanzar un modal cuando termine el juego
+
+function endGame() {
+  modal.setAttribute("id", "modal");
+  modal.innerHTML = `
+  <div>
+  <h2>Fin del Juego</h2>
+  <p>INTENTOS: ${puntuacion} TIEMPO: 00:00s</p>
+  <button class="botonModal">Jugar de nuevo
+</button>
+
+  </div>
+  `;
+
+  body.append(modal);
+  modal.addEventListener("click", () => {
+    modal.remove();
+    resetGame();
+  });
+}
+botonModal.addEventListener("click", () => resetGame());
+////////////////////TIEMPO
+
+function contarTiempo() {
+  tiempoRegresivo = setInterval(() => {
+    timer++;
+    tiempo.textContent = `TIEMPO: ${timer}s`;
+    // if (timer == 0) {
+    //   clearInterval(tiempoRegresivo);
+    //   alert(`tu tiempo ha terminado y tus intentos fueron ${puntuacion}`); //${puntuacion}`);
+    //   resetGame(); // resetgame
+    //}
+  }, 1000);
+}
+
+
+
