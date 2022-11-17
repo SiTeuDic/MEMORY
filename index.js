@@ -5,7 +5,8 @@ const backCard = document.querySelectorAll(".back");
 const puntos = document.querySelector(".puntos");
 const body = document.querySelector("body");
 const h1 = document.querySelector("h1");
-const tiempo = document.querySelector(".tiempo");
+const segundos = document.querySelector(".segundos");
+const minutos = document.querySelector("#minutos");
 const modal = document.createElement("div");
 const parrafoModal = document.querySelector("div p");
 const botonModal = document.querySelector(".botonModal");
@@ -82,8 +83,8 @@ let emojisClassic = [
 //Declaracion de las variables, marcadores...
 // Guardamos las cartas seleccionadas en un array
 let temporizador = false;
-let timer = 0;
-let tiempoRegresivo = null;
+//let timer = 0;
+let tiempoMinSegun = null;
 
 let flippedCards = [];
 // Guardamos el elemento completo, [...]
@@ -278,16 +279,22 @@ botonModal.addEventListener("click", () => resetGame());
 ////////////////////TIEMPO
 
 function contarTiempo() {
-  tiempoRegresivo = setInterval(() => {
-    timer++;
-    tiempo.textContent = `TIEMPO: ${timer}s`;
-    // if (timer == 0) {
-    //   clearInterval(tiempoRegresivo);
-    //   alert(`tu tiempo ha terminado y tus intentos fueron ${puntuacion}`); //${puntuacion}`);
-    //   resetGame(); // resetgame
-    //}
+  let contadorSegundos = 0;
+  let contadorMinutos = 0;
+
+  tiempoMinSegun = setInterval(() => {
+    if (contadorSegundos == 60) {
+      contadorSegundos = 0;
+      contadorMinutos++;
+      //contadorSegundos = "0" + contadorSegundos;
+      minutos.innerHTML = contadorMinutos;
+      if (contadorMinutos == 0) {
+        contadorMinutos = 0;
+      }
+    }
+    segundos.innerHTML = contadorSegundos;
+    contadorSegundos++;
+
+    segundos.textContent = `TIEMPO: ${contadorMinutos} : ${contadorSegundos}`;
   }, 1000);
 }
-
-
-
