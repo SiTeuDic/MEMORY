@@ -24,11 +24,11 @@ let puntuacion = 0;
 let numberOfMatches = 0;
 let randomEmoji = createRandomArrayFromOther(emojisArr);
 let randomEmojiPar = [...randomEmoji, ...randomEmoji];
-let nombreSonido = new Audio("/MEMORY/sonidos/pasarcarta.wav");
-let gameOver = new Audio("/MEMORY/sonidos/perdedor.wav");
-let noCoincidenCartas = new Audio("/MEMORY/sonidos/noCoincidenCartas.wav");
-let coincidenCartas = new Audio("/MEMORY/sonidos/win.wav");
-let ganador = new Audio("/MEMORY/sonidos/fuegosArtificiales.wav");
+let nombreSonido = new Audio("/sonidos/pasarcarta.wav");
+let gameOver = new Audio("/sonidos/perdedor.wav");
+let noCoincidenCartas = new Audio("/sonidos/noCoincidenCartas.wav");
+let coincidenCartas = new Audio("/sonidos/win.wav");
+let ganador = new Audio("/sonidos/fuegosArtificiales.wav");
 
 //////////////////////////////////////////////////////////////
 
