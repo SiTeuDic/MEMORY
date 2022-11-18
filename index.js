@@ -3,13 +3,13 @@
 const cards = document.querySelectorAll(".card");
 const backCard = document.querySelectorAll(".back");
 const puntos = document.querySelector(".puntos");
-const body = document.querySelector("body");
 const h1 = document.querySelector("h1");
 const segundos = document.querySelector(".segundos");
 const minutos = document.querySelector("#minutos");
 const modal = document.createElement("div");
 const parrafoModal = document.querySelector("div p");
 const botonModal = document.querySelector(".botonModal");
+
 
 const celda = document.querySelector(".content");
 //Array de emojis

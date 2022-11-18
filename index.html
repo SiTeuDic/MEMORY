@@ -15,14 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MEMORY</title>
   </head>
-  <body class="classic">
+  <body class="darkmode">
     <header>
       <h1>MEMORY</h1>
     </header>
       <ul class="">
-
         <li class="puntos">INTENTOS:</li>
         <li class="segundos" id="minutos">TIEMPO 00:00</li>
+        <li><button id = "dark">DARK</button> </button></li>
       </ul>
       <div class="tablero">
         <section class="card">
@@ -123,6 +123,31 @@
         </section>
       </div>
     </main>
+    <script>
+      const dark = document.querySelector('#dark');
+      const body = document.querySelector('body');
+
+      load();
+
+      dark.addEventListener('click', e => {
+          body.classList.toggle('darkmode');
+          store(body.classList.contains('darkmode'))
+      });
+
+      function load() {
+        const darkmode = localStorage.getItem('darkmode');
+
+      if(!darkmode){
+        store('false');
+        }else if (darkmode=='true') {
+        body.classList.add('darkmode')
+        }
+      }
+      function store(value) {
+        localStorage.setItem('darkmode', value);
+      }
+
+    </script>
     <script src="index.js"></script>
   </body>
 </html>
