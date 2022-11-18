@@ -9,8 +9,8 @@ const minutos = document.querySelector("#minutos");
 const modal = document.createElement("div");
 const parrafoModal = document.querySelector("div p");
 const botonModal = document.querySelector(".botonModal");
+const botonNoche = document.querySelector(".switch-button");
 
-const celda = document.querySelector(".content");
 //Array de emojis
 let emojisArr = ["🌇", "🌉", "🌃", "🌄", "🌅", "🏞", "🎑", "🛤"];
 
@@ -227,7 +227,7 @@ function endGame() {
     resetGame();
   });
 }
-botonModal.addEventListener("click", () => resetGame());
+// botonModal.addEventListener("click", () => resetGame());
 ////////////////////TIEMPO
 
 function contarTiempo() {
@@ -257,3 +257,6 @@ function contarTiempo() {
     segundos.textContent = `TIEMPO: ${contadorMinutos} : ${contadorSegundos}`;
   }, 1000);
 }
+//////////MODO NOCHE////////////////////
+
+botonNoche.addEventListener("change", (e) => body.classList.toggle("dark"));
