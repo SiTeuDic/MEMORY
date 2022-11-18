@@ -229,34 +229,36 @@ function endGame() {
 }
 // botonModal.addEventListener("click", () => resetGame());
 ////////////////////TIEMPO
+let contadorSegundos = 0;
+let contadorMinutos = 0;
 
-function contarTiempo() {
-  let contadorSegundos = 0;
-  let contadorMinutos = 0;
+// function contarTiempo() {
+//   if (contadorMinutos < 10) {
+//     contadorMinutos = "0" + contadorMinutos;
+//   }
+// }
 
+tiempoMinSegun = setInterval(() => {
+  if (contadorMinutos == 0) {
+    contadorMinutos = 0;
+  }
+  if (contadorSegundos == 59) {
+    contadorSegundos = 0;
+    contadorMinutos++;
+    //contadorSegundos = "0" + contadorSegundos;
+    minutos.innerHTML = contadorMinutos;
+  }
+  segundos.innerHTML = contadorSegundos;
+  contadorSegundos++;
   if (contadorSegundos < 10) {
     contadorSegundos = "0" + contadorSegundos;
   }
-  if (contadorMinutos < 10) {
-    contadorMinutos = "0" + contadorMinutos;
-  }
 
-  tiempoMinSegun = setInterval(() => {
-    if (contadorSegundos == 60) {
-      contadorSegundos = 0;
-      contadorMinutos++;
-      //contadorSegundos = "0" + contadorSegundos;
-      minutos.innerHTML = contadorMinutos;
-      if (contadorMinutos == 0) {
-        contadorMinutos = 0;
-      }
-    }
-    segundos.innerHTML = contadorSegundos;
-    contadorSegundos++;
+  segundos.textContent = `TIEMPO: ${
+    "0" + contadorMinutos
+  } : ${contadorSegundos}`;
+}, 1000);
 
-    segundos.textContent = `TIEMPO: ${contadorMinutos} : ${contadorSegundos}`;
-  }, 1000);
-}
 //////////MODO NOCHE////////////////////
 
 botonNoche.addEventListener("change", (e) => body.classList.toggle("dark"));
