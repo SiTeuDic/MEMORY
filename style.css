@@ -1,10 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Nabla&family=Outfit:wght@300;400;600&family=Roboto+Slab:wght@500&family=VT323&display=swap");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&family=Open+Sans:wght@300&family=Press+Start+2P&display=swap");
 =======
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&family=Open+Sans:wght@300&family=Press+Start+2P&display=swap');
 >>>>>>> 946400a (sonido de las cartas)
+=======
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&family=Open+Sans:wght@300&family=Press+Start+2P&display=swap");
+>>>>>>> 3ef9d45 (modo noche)
 
 * {
   margin: 0;
@@ -87,18 +91,25 @@ header {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #dark:hover {
   background-color: black;
   color: white;
 }
 =======
 #dark:hover{
+=======
+#dark:hover {
+>>>>>>> 3ef9d45 (modo noche)
   background-color: black;
   color: white;
 }
 
+<<<<<<< HEAD
 >>>>>>> 62c1561 (modo nocturno)
 
+=======
+>>>>>>> 3ef9d45 (modo noche)
 ul {
   display: flex;
   align-items: center;
@@ -107,19 +118,26 @@ ul {
   color: var(--color-letra);
   font-weight: bold;
 <<<<<<< HEAD
+<<<<<<< HEAD
   box-shadow: 1px 1px 5px var(--color-sombra);
 =======
   box-shadow: 1px 1px 5px var(--color-letra);
 >>>>>>> 62c1561 (modo nocturno)
+=======
+  box-shadow: 1px 1px 5px var(--color-sombra);
+>>>>>>> 3ef9d45 (modo noche)
   border-radius: 5px;
   margin: 1rem 0.5rem;
   padding: 0.5rem;
   background-color: var(--colorSecundario);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   
 
 >>>>>>> 62c1561 (modo nocturno)
+=======
+>>>>>>> 3ef9d45 (modo noche)
 }
 
 /* UL ARCADE */
@@ -138,7 +156,6 @@ ul.arcade {
   padding: 0.5rem;
 }
   */
-
 
 .tablero {
   display: flex;
@@ -165,10 +182,13 @@ ul.arcade {
   width: 5rem;
   height: 5rem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   
   
 >>>>>>> 62c1561 (modo nocturno)
+=======
+>>>>>>> 3ef9d45 (modo noche)
 }
 
 .content {
@@ -180,8 +200,6 @@ ul.arcade {
   display: flex;
   align-content: center;
   justify-content: center;
-
-
 }
 
 .front,
@@ -199,7 +217,6 @@ ul.arcade {
   box-shadow: 0px 0px 4px black;
   font-family: var(--font);
   font-size: 1rem;
- 
 }
 
 .back {
@@ -349,6 +366,53 @@ button {
 ul,
 h1 {
   cursor: default;
+<<<<<<< HEAD
+}
+
+/*MODO OSCURO */
+
+.switch-button {
+  display: inline-block;
+}
+.switch-button .switch-button__checkbox {
+  display: none;
+}
+.switch-button .switch-button__label {
+  background-color: var(--colorSecundario);
+  width: 2rem;
+  height: 1rem;
+  border-radius: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border: 1px solid black;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.281);
+}
+.switch-button .switch-button__label:before {
+  transition: 0.2s;
+  display: block;
+  position: absolute;
+  width: 0.9rem;
+  height: 0.85rem;
+  background-color: rgb(255, 255, 255);
+  content: "";
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 0px 1px rgb(0, 0, 0);
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label {
+  background-color: var(--colorSecundario);
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+  transform: translateX(1rem);
+}
+.pBtn {
+  margin-top: 1px;
+  margin: 1px;
+  font-size: 10px;
+  user-select: none;
+=======
+>>>>>>> 3ef9d45 (modo noche)
 }
 
 /*MODO OSCURO */
@@ -394,49 +458,3 @@ h1 {
   font-size: 10px;
   user-select: none;
 }
-
-
-/*MODO OSCURO */
-
-body.darkmode {
-  background-color: #e88d17;
-}
-
-.darkmode h1 {
-  background-color:  #d1a045;
-  color: white;
-}
-
-.darkmode ul  {
-  background-color: #d1a045;
-  color: white;
-  box-shadow: 1px 1px 5px white;
-}
-
-.darkmode .tablero  {
-  background-color:  #d1a045;
-}
-
-.darkmode .back {
-  background: linear-gradient(#f8b447, #fc6620);
-}
-
-.darkmode .front 
-{
-  background: linear-gradient(#f8b447, #fc6620);
-}
-
-.darkmode #dark{
-  color: white;
-}
-/*
---colorfondo: #f55353;
-  --colorDegradadoCarta: linear-gradient(#f8b447, #fc6620);
-  --colorDegradadoCartaE: #feb139;
-  --colorSecundario: #143f6b;
-  --color-letra: #f55353;
-  --sombra: rgba(255, 255, 255, 0.637);
-  --sombraUlMemory:#21466b;
-  --font: nabla;
-  --font2: Roboto Slab;
-  --table: #e73939d2;
