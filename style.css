@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Nabla&family=Outfit:wght@300;400;600&family=Roboto+Slab:wght@500&family=VT323&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&family=Open+Sans:wght@300&family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&family=Open+Sans:wght@300&family=Press+Start+2P&display=swap");
 
 * {
   margin: 0;
@@ -34,20 +34,16 @@ html {
   --colorSecundario: #006e7f;
   --color-letra: #f8cb2e;
 } */
-/*
-body.arcade {
-  --colorfondo: #f55353;
-  --colorDegradadoCarta: linear-gradient(#f8b447, #fc6620);
-  --colorDegradadoCartaE: #feb139;
-  --colorSecundario: #143f6b;
-  --color-letra: #f55353;
-  --sombra: rgba(255, 255, 255, 0.637);
-  --sombraUlMemory:#21466b;
-  --font: nabla;
-  --font2: Roboto Slab;
+
+body.dark {
+  --colorfondo: #151515;
+  --colorDegradadoCarta: #2c345e;
+  --colorDegradadoCartaE: #3c415c;
+  --colorSecundario: #301b3f;
+  --color-letra: #b4a5a5;
+  --color-sombra: #3f3e3d;
   --table: #e73939d2;
 }
-*/
 
 body {
   display: grid;
@@ -86,26 +82,23 @@ header {
   font-weight: bold;
 }
 
-#dark:hover{
+#dark:hover {
   background-color: black;
   color: white;
 }
-
 
 ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
   list-style: none;
-  color: black;
+  color: var(--color-letra);
   font-weight: bold;
-  box-shadow: 1px 1px 5px var(--color-letra);
+  box-shadow: 1px 1px 5px var(--color-sombra);
   border-radius: 5px;
   margin: 1rem 0.5rem;
   padding: 0.5rem;
   background-color: var(--colorSecundario);
-  
-
 }
 
 /* UL ARCADE */
@@ -124,7 +117,6 @@ ul.arcade {
   padding: 0.5rem;
 }
   */
-
 
 .tablero {
   display: flex;
@@ -150,8 +142,6 @@ ul.arcade {
   box-shadow: 1px 1px 1px var(--color-sombra);
   width: 5rem;
   height: 5rem;
-  
-  
 }
 
 .content {
@@ -163,8 +153,6 @@ ul.arcade {
   display: flex;
   align-content: center;
   justify-content: center;
-
-
 }
 
 .front,
@@ -182,7 +170,6 @@ ul.arcade {
   box-shadow: 0px 0px 4px black;
   font-family: var(--font);
   font-size: 1rem;
- 
 }
 
 .back {
@@ -233,17 +220,14 @@ button {
   border-radius: 4px;
 }
 
-
 .front:hover {
   background-color: var(--colorDegradadoCartaE);
 }
-
 
 /*MOVIMIENTO AMBAS CARTAS COINCIDEN*/
 
 @keyframes movimiento {
   50% {
-
     transform: translateY(5rem);
   }
   75% {
@@ -251,7 +235,6 @@ button {
   }
   100% {
     transform: translateY(15rem);
-
 
     opacity: 0;
   }
@@ -326,7 +309,6 @@ button {
   background-color: black;
   box-shadow: 0 1px #666;
   transform: translateY(5px);
-
 }
 
 /* CURSOR */
@@ -337,51 +319,48 @@ button {
 ul,
 h1 {
   cursor: default;
-
 }
-
 
 /*MODO OSCURO */
 
-body.darkmode {
-  background-color: #e88d17;
+.switch-button {
+  display: inline-block;
 }
-
-.darkmode h1 {
-  background-color:  #d1a045;
-  color: white;
+.switch-button .switch-button__checkbox {
+  display: none;
 }
-
-.darkmode ul  {
-  background-color: #d1a045;
-  color: white;
-  box-shadow: 1px 1px 5px white;
+.switch-button .switch-button__label {
+  background-color: var(--colorSecundario);
+  width: 2rem;
+  height: 1rem;
+  border-radius: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border: 1px solid black;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.281);
 }
-
-.darkmode .tablero  {
-  background-color:  #d1a045;
+.switch-button .switch-button__label:before {
+  transition: 0.2s;
+  display: block;
+  position: absolute;
+  width: 0.9rem;
+  height: 0.85rem;
+  background-color: rgb(255, 255, 255);
+  content: "";
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 0px 1px rgb(0, 0, 0);
 }
-
-.darkmode .back {
-  background: linear-gradient(#f8b447, #fc6620);
+.switch-button .switch-button__checkbox:checked + .switch-button__label {
+  background-color: var(--colorSecundario);
 }
-
-.darkmode .front 
-{
-  background: linear-gradient(#f8b447, #fc6620);
+.switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+  transform: translateX(1rem);
 }
-
-.darkmode #dark{
-  color: white;
+.pBtn {
+  margin-top: 1px;
+  margin: 1px;
+  font-size: 10px;
+  user-select: none;
 }
-/*
---colorfondo: #f55353;
-  --colorDegradadoCarta: linear-gradient(#f8b447, #fc6620);
-  --colorDegradadoCartaE: #feb139;
-  --colorSecundario: #143f6b;
-  --color-letra: #f55353;
-  --sombra: rgba(255, 255, 255, 0.637);
-  --sombraUlMemory:#21466b;
-  --font: nabla;
-  --font2: Roboto Slab;
-  --table: #e73939d2;

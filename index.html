@@ -15,14 +15,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MEMORY</title>
   </head>
-  <body class="darkmode">
+  <body class="">
     <header>
       <h1>MEMORY</h1>
     </header>
       <ul class="">
         <li class="puntos">INTENTOS:</li>
         <li class="segundos" id="minutos">TIEMPO 00:00</li>
-        <li><button id = "dark">DARK</button> </button></li>
+        <li>  <div class="switch-button">
+          <!-- Checkbox -->
+          <input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox">
+          <!-- Botón -->
+          <label for="switch-label" class="switch-button__label"><p class="pBtn">☀️</p> <p class="pBtn">🌙</p></label>
+      </div></li>
       </ul>
       <div class="tablero">
         <section class="card">
