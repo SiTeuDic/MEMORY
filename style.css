@@ -64,7 +64,7 @@ h1 {
   font-family: var(--font);
   align-items: center;
   justify-content: center;
-  padding: 0.3rem;
+  padding: 0.5rem;
   /* text-shadow: 1px 1px var(--sombra); */
 }
 header {
@@ -75,20 +75,36 @@ header {
   background-color: var(--colorSecundario);
 }
 
+#dark {
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 1px;
+  border: none;
+  background: transparent;
+  display: flex;
+  color: black;
+  font-weight: bold;
+}
+
+#dark:hover{
+  background-color: black;
+  color: white;
+}
+
 
 ul {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   list-style: none;
   color: black;
   font-weight: bold;
-
   box-shadow: 1px 1px 5px var(--color-letra);
   border-radius: 5px;
   margin: 1rem 0.5rem;
   padding: 0.5rem;
   background-color: var(--colorSecundario);
+  
 
 }
 
@@ -107,8 +123,8 @@ ul.arcade {
   margin: 1rem 0.5rem;
   padding: 0.5rem;
 }
-
   */
+
 
 .tablero {
   display: flex;
@@ -126,25 +142,29 @@ ul.arcade {
   background-color: var(--colorSecundario);
 }
 .card {
-  width: 5rem;
-  height: 5rem;
-  /* what? */
-  perspective: 500px;
+  /* what? **/
+  /*Esto es lo que va debajo de la carta cuando se mueve*/
   border: 1px solid var(--colorSecundario);
   border-radius: 0.5rem;
-  background-color: #ffefd6;
+  background-color: var(--colorfondo);
   box-shadow: 1px 1px 1px var(--color-sombra);
+  width: 5rem;
+  height: 5rem;
+  
+  
 }
 
 .content {
-  position: absolute;
-  width: 100%;
+  position: relative;
   height: 100%;
+  width: 100%;
   transition: transform 1s;
   transform-style: preserve-3d;
   display: flex;
   align-content: center;
   justify-content: center;
+
+
 }
 
 .front,
@@ -162,6 +182,7 @@ ul.arcade {
   box-shadow: 0px 0px 4px black;
   font-family: var(--font);
   font-size: 1rem;
+ 
 }
 
 .back {
@@ -169,6 +190,8 @@ ul.arcade {
   transform: rotateY(180deg);
   font-size: 3em;
 }
+
+/*esto que es*/
 table {
   margin: auto;
   margin-top: 1rem;
@@ -316,3 +339,49 @@ h1 {
   cursor: default;
 
 }
+
+
+/*MODO OSCURO */
+
+body.darkmode {
+  background-color: #e88d17;
+}
+
+.darkmode h1 {
+  background-color:  #d1a045;
+  color: white;
+}
+
+.darkmode ul  {
+  background-color: #d1a045;
+  color: white;
+  box-shadow: 1px 1px 5px white;
+}
+
+.darkmode .tablero  {
+  background-color:  #d1a045;
+}
+
+.darkmode .back {
+  background: linear-gradient(#f8b447, #fc6620);
+}
+
+.darkmode .front 
+{
+  background: linear-gradient(#f8b447, #fc6620);
+}
+
+.darkmode #dark{
+  color: white;
+}
+/*
+--colorfondo: #f55353;
+  --colorDegradadoCarta: linear-gradient(#f8b447, #fc6620);
+  --colorDegradadoCartaE: #feb139;
+  --colorSecundario: #143f6b;
+  --color-letra: #f55353;
+  --sombra: rgba(255, 255, 255, 0.637);
+  --sombraUlMemory:#21466b;
+  --font: nabla;
+  --font2: Roboto Slab;
+  --table: #e73939d2;
