@@ -160,7 +160,7 @@ function terminarJuego() {
     modal.innerHTML = `
     <div>
     <h2>Fin del Juego</h2>
-    <p>INTENTOS: ${puntuacion} TIEMPO:${timer}s</p>
+    <p>INTENTOS: ${puntuacion} TIEMPO:${contadorMinutos}:${contadorSegundos}s</p>
     <button class="botonModal">Jugar de nuevo
   </button>
   
@@ -185,7 +185,7 @@ function resetGame() {
   numberOfMatches = 0;
   timer = 0;
   puntos.textContent = `Intentos:  ${puntuacion}`;
-  tiempo.textContent = `TIEMPO:  ${contadorMinutos} : ${contadorSegundos}`;
+  segundos.textContent = `TIEMPO:  ${contadorMinutos} : ${contadorSegundos}`;
 
   setTimeout(
     () =>
@@ -214,7 +214,9 @@ function endGame() {
   modal.innerHTML = `
   <div>
   <h2>Fin del Juego</h2>
-  <p>INTENTOS: ${puntuacion} TIEMPO: 00:00s</p>
+  <p>INTENTOS: ${puntuacion} TIEMPO: ${
+    "0" + contadorMinutos
+  } : ${contadorSegundos}s</p>
   <button class="botonModal">Jugar de nuevo
 </button>
 
@@ -232,32 +234,28 @@ function endGame() {
 let contadorSegundos = 0;
 let contadorMinutos = 0;
 
-// function contarTiempo() {
-//   if (contadorMinutos < 10) {
-//     contadorMinutos = "0" + contadorMinutos;
-//   }
-// }
+function contarTiempo() {
+  tiempoMinSegun = setInterval(() => {
+    if (contadorMinutos == 0) {
+      contadorMinutos = 0;
+    }
+    if (contadorSegundos == 59) {
+      contadorSegundos = 0;
+      contadorMinutos++;
+      //contadorSegundos = "0" + contadorSegundos;
+      minutos.innerHTML = contadorMinutos;
+    }
+    segundos.innerHTML = contadorSegundos;
+    contadorSegundos++;
+    if (contadorSegundos < 10) {
+      contadorSegundos = "0" + contadorSegundos;
+    }
 
-tiempoMinSegun = setInterval(() => {
-  if (contadorMinutos == 0) {
-    contadorMinutos = 0;
-  }
-  if (contadorSegundos == 59) {
-    contadorSegundos = 0;
-    contadorMinutos++;
-    //contadorSegundos = "0" + contadorSegundos;
-    minutos.innerHTML = contadorMinutos;
-  }
-  segundos.innerHTML = contadorSegundos;
-  contadorSegundos++;
-  if (contadorSegundos < 10) {
-    contadorSegundos = "0" + contadorSegundos;
-  }
-
-  segundos.textContent = `TIEMPO: ${
-    "0" + contadorMinutos
-  } : ${contadorSegundos}`;
-}, 1000);
+    segundos.textContent = `TIEMPO: ${
+      "0" + contadorMinutos
+    } : ${contadorSegundos}`;
+  }, 1000);
+}
 
 //////////MODO NOCHE////////////////////
 
