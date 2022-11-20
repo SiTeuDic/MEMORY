@@ -15,7 +15,7 @@ const botonNoche = document.querySelector(".switch-button");
 let emojisArr = ["🌇", "🌉", "🌃", "🌄", "🌅", "🏞", "🎑", "🛤"];
 
 let temporizador = false;
-let timer = 0;
+//let timer = 0;
 let tiempoMinSegun = null;
 
 let flippedCards = [];
@@ -93,12 +93,7 @@ for (let i = 0; i < 16; i++) {
 //////////////////////////////////////
 //Funcion PRINCIPAL
 function reveal(event) {
-  //tiempo
-
-  if (temporizador == false) {
-    contarTiempo();
-    temporizador = true;
-  }
+  inicioDeTiempo();
 
   const card = event.target.closest(".card");
 
@@ -231,6 +226,14 @@ function endGame() {
 }
 // botonModal.addEventListener("click", () => resetGame());
 ////////////////////TIEMPO
+
+function inicioDeTiempo() {
+  if (temporizador == false) {
+    contarTiempo();
+    temporizador = true;
+  }
+}
+
 let contadorSegundos = 0;
 let contadorMinutos = 0;
 
