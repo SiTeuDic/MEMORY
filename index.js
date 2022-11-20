@@ -12,8 +12,10 @@ const botonModal = document.querySelector(".botonModal");
 const botonNoche = document.querySelector(".switch-button");
 const body = document.querySelector("body")
 let emojisArr = ["🌇", "🌉", "🌃", "🌄", "🌅", "🏞", "🎑", "🛤"];
+
 let temporizador = false;
 let tiempoMinSegun = null;
+
 
 let flippedCards = [];
 let flippedElement = [];
@@ -157,7 +159,7 @@ function endGame() {
   modal.innerHTML = `
   <div>
   <h2>Fin del Juego</h2>
-  <p>INTENTOS: ${score} TIEMPO: ${
+  <p>INTENTOS: ${puntuacion} TIEMPO: ${
     "0" + contadorMinutos
   } : ${contadorSegundos}s</p>
   <button class="botonModal">Jugar de nuevo
@@ -172,7 +174,8 @@ function endGame() {
     resetGame();
   });
 }
-
+// botonModal.addEventListener("click", () => resetGame());
+////////////////////TIEMPO
 
 function inicioDeTiempo() {
   if (temporizador == false) {
@@ -207,4 +210,6 @@ function contarTiempo() {
   }, 1000);
 }
 
+//////////MODO NOCHE////////////////////
 
+botonNoche.addEventListener("change", (e) => body.classList.toggle("dark"));
