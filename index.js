@@ -14,10 +14,6 @@ const botonNoche = document.querySelector(".switch-button");
 //Array de emojis
 let emojisArr = ["🌇", "🌉", "🌃", "🌄", "🌅", "🏞", "🎑", "🛤"];
 
-let temporizador = false;
-//let timer = 0;
-let tiempoMinSegun = null;
-
 let flippedCards = [];
 let flippedElement = [];
 let puntuacion = 0;
@@ -226,6 +222,8 @@ function endGame() {
 }
 // botonModal.addEventListener("click", () => resetGame());
 ////////////////////TIEMPO
+let temporizador = false;
+let tiempoMinSegun = null;
 
 function inicioDeTiempo() {
   if (temporizador == false) {
