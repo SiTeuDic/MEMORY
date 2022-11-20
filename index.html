@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nabla&family=Outfit:wght@300;400;600&family=Roboto+Slab:wght@500&display=swap"
-      rel="stylesheet"
-    />
+
     <link rel="shortcut icon" href="img/Memory.png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,6 +26,7 @@
           <label for="switch-label" class="switch-button__label"><p class="pBtn">☀️</p> <p class="pBtn">🌙</p></label>
       </div></li>
       </ul>
+      <main>
       <div class="tablero">
         <section class="card">
           <div class="content">
@@ -127,32 +125,7 @@
           </div>
         </section>
       </div>
-    </main>
-    <script>
-      const dark = document.querySelector('#dark');
-      const body = document.querySelector('body');
-
-      load();
-
-      dark.addEventListener('click', e => {
-          body.classList.toggle('darkmode');
-          store(body.classList.contains('darkmode'))
-      });
-
-      function load() {
-        const darkmode = localStorage.getItem('darkmode');
-
-      if(!darkmode){
-        store('false');
-        }else if (darkmode=='true') {
-        body.classList.add('darkmode')
-        }
-      }
-      function store(value) {
-        localStorage.setItem('darkmode', value);
-      }
-
-    </script>
+      </main>
     <script src="index.js"></script>
   </body>
 </html>

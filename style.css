@@ -8,39 +8,26 @@
   box-sizing: border-box;
 }
 
-/* 
-html {
-  --colorfondo: #f2deba;
-  --colorDegradadoCarta: linear-gradient(#0e5e6f, #3a8891);
-  --colorDegradadoCartaE: linear-gradient(#0e5e6f, #ffefd6);
-  --colorSecundario: #ffefd6;
-} */
 
-html {
+
+html  {
   --colorfondo: #ffefd6;
   --colorDegradadoCarta: #0e5d6fc5;
   --colorDegradadoCartaE: #6aa4aa;
   --colorSecundario: #f2deba;
   --color-letra: #19282f;
-  --color-sombra: #ebad4b;
-  --table: var(--colorSecundario);
+  --color-sombra: #ebae4b6f;
   --font: Major Mono Display;
-  --font2: ;
+  
 }
-/* html.a1 {
-  --colorfondo: #b22727;
-  --colorDegradadoCarta: #ee5007;
-  --colorDegradadoCartaE: #816797;
-  --colorSecundario: #006e7f;
-  --color-letra: #f8cb2e;
-} */
+
 
 body.dark {
-  --colorfondo: #151515;
-  --colorDegradadoCarta: #2c345e;
-  --colorDegradadoCartaE: #3c415c;
-  --colorSecundario: #301b3f;
-  --color-letra: #b4a5a5;
+  --colorfondo: #191919;
+  --colorDegradadoCarta: #481e9b;
+  --colorDegradadoCartaE: #542da2;
+  --colorSecundario: #2D4263;
+  --color-letra: #ECDBBA;
   --color-sombra: #3f3e3d;
   --table: #e73939d2;
 }
@@ -101,22 +88,6 @@ ul {
   background-color: var(--colorSecundario);
 }
 
-/* UL ARCADE */
-/*
-ul.arcade {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  list-style: none;
-  color: rgb(223, 223, 72);
-  font-weight: bold;
-  border: 1.5px solid  var(--colorSecundario);
-  box-shadow: 1px 1px 2px var(--sombraUlMemory); 
-  border-radius: 5px;
-  margin: 1rem 0.5rem;
-  padding: 0.5rem;
-}
-  */
 
 .tablero {
   display: flex;
@@ -132,10 +103,10 @@ ul.arcade {
   margin-left: auto;
   margin-right: auto;
   background-color: var(--colorSecundario);
+ 
 }
 .card {
-  /* what? **/
-  /*Esto es lo que va debajo de la carta cuando se mueve*/
+ 
   border: 1px solid var(--colorSecundario);
   border-radius: 0.5rem;
   background-color: var(--colorfondo);
@@ -178,7 +149,6 @@ ul.arcade {
   font-size: 3em;
 }
 
-/*esto que es*/
 table {
   margin: auto;
   margin-top: 1rem;
@@ -198,16 +168,13 @@ table {
   animation-delay: 0.5s;
 }
 
-/* .rotate {
-  border: 1px solid;
-  animation: rotate 2s;
-} */
+
 .rotate,
 .card {
   transform: rotate(720deg);
 }
 
-/*  */
+
 
 button {
   width: min-content;

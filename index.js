@@ -1,5 +1,5 @@
 "use strict";
-//Seleción de los elemento
+
 const cards = document.querySelectorAll(".card");
 const backCard = document.querySelectorAll(".back");
 const puntos = document.querySelector(".puntos");
@@ -10,27 +10,25 @@ const modal = document.createElement("div");
 const parrafoModal = document.querySelector("div p");
 const botonModal = document.querySelector(".botonModal");
 const botonNoche = document.querySelector(".switch-button");
-
-//Array de emojis
+const body = document.querySelector("body")
 let emojisArr = ["🌇", "🌉", "🌃", "🌄", "🌅", "🏞", "🎑", "🛤"];
-
 let temporizador = false;
-//let timer = 0;
 let tiempoMinSegun = null;
 
 let flippedCards = [];
 let flippedElement = [];
-let puntuacion = 0;
+let score = 0;
 let numberOfMatches = 0;
 let randomEmoji = createRandomArrayFromOther(emojisArr);
 let randomEmojiPar = [...randomEmoji, ...randomEmoji];
-let nombreSonido = new Audio("/sonidos/pasarcarta.wav");
-let gameOver = new Audio("/sonidos/perdedor.wav");
-let noCoincidenCartas = new Audio("/sonidos/noCoincidenCartas.wav");
-let coincidenCartas = new Audio("/sonidos/win.wav");
-let ganador = new Audio("/sonidos/fuegosArtificiales.wav");
+let nombreSonido = new Audio("/MEMORY/sonidos/pasarcarta.wav");
+let gameOver = new Audio("/MEMORY/sonidos/perdedor.wav");
+let noCoincidenCartas = new Audio("/MEMORY/sonidos/noCoincidenCartas.wav");
+let coincidenCartas = new Audio("/MEMORY/sonidos/win.wav");
+let ganador = new Audio("/MEMORY/sonidos/fuegosArtificiales.wav");
+botonNoche.addEventListener("change", (e) => body.classList.toggle("dark"));
 
-//////////////////////////////////////////////////////////////
+
 
 function createRandomArrayFromOther(array) {
   const clonedArray = [...array];
@@ -44,54 +42,17 @@ function createRandomArrayFromOther(array) {
   }
   return randomArray;
 }
-//////////////////////POR TERMiNAR ////////////////////////////////
-//Cambiar de estilo
-/* [1. si la partia aun no ha empezado no pasa nada
-  2. si la partia ha comnzado que salga un modal con dos opciones, "Si cambias ahora perderas todos los avances del juego"] 
-  3.reset del juego + cambios de emojis*/
 
-/* h1.addEventListener("click", Mode);
-
-function Mode(e) {
-  if (flippedCards.length || flippedElement.length) {
-    console.log("holi");
-    modal.setAttribute("id", "modal");
-    modal.innerHTML = `
-    <div>
-    <h2>¿SEGURO QUE QUIERES CAMBIR DE MODO?</h2>
-    <p>Si cambias ahora perderas el progreso del juego</p>
-    <button class="botonModal">Cambiar de modo</button>
-    <button>Seguir jugando
-</button>
-    </div>
-    `;
-
-    body.append(modal);
-    botonModal.addEventListener("click", () => {
-      console.log("holi");
-      modal.remove();
-      body.classList.toggle("arcade");
-      resetGame();
-    });
-  } else {
-    body.classList.toggle("arcade");
-  }
-
-} */
-
-//////////////////////////////////////
-//Colocar cada emoji en su caja.
 for (let i = 0; i < 16; i++) {
   const randomIndex = Math.floor(Math.random() * randomEmojiPar.length);
 
   backCard[i].innerHTML = randomEmojiPar[randomIndex];
 
   randomEmojiPar.splice(randomIndex, 1);
-  console.log(randomEmojiPar, randomIndex);
+
 }
 
-//////////////////////////////////////
-//Funcion PRINCIPAL
+
 function reveal(event) {
   inicioDeTiempo();
 
@@ -103,30 +64,29 @@ function reveal(event) {
     flippedCards.push(card.innerText);
     flippedElement.push(card);
     if (flippedCards.length === 2) {
-      comprobarPareja();
+      checkMatch();
     }
   }
 }
-////////////////////////////////////////
+
 for (const card of cards) {
   card.addEventListener("click", reveal);
 }
-//////////////////////////////////////////////////////////////////////
-//
-function comprobarPareja() {
+
+function checkMatch() {
   const emoji1 = flippedCards[0];
   const emoji2 = flippedCards[1];
 
   if (emoji1 === emoji2) {
-    puntuacion++;
+    score++;
     numberOfMatches++;
 
-    puntos.textContent = `Intentos:  ${puntuacion} `;
+    puntos.textContent = `Intentos:  ${score} `;
     for (const element of flippedElement) {
       element.classList.add("move");
     }
 
-    setTimeout(() => terminarJuego(), 500);
+    setTimeout(() => endGame(), 500);
 
     flippedCards.length = 0;
     flippedElement = [];
@@ -138,24 +98,23 @@ function comprobarPareja() {
         card.classList.remove("flipped");
       });
 
-      puntuacion++;
-      puntos.textContent = `INTENTOS: ${puntuacion} `;
+      score++;
+      puntos.textContent = `INTENTOS: ${score} `;
       flippedElement = [];
 
       flippedCards.length = 0;
     }, 500);
   }
 }
-//////////////////////////////////////////////////////
-//
-function terminarJuego() {
+
+function endGame() {
   if (numberOfMatches == 8) {
     ganador.play();
     modal.setAttribute("id", "modal");
     modal.innerHTML = `
     <div>
     <h2>Fin del Juego</h2>
-    <p>INTENTOS: ${puntuacion} TIEMPO:${contadorMinutos}:${contadorSegundos}s</p>
+    <p>INTENTOS: ${score} TIEMPO:${contadorMinutos}:${contadorSegundos}s</p>
     <button class="botonModal">Jugar de nuevo
   </button>
   
@@ -169,17 +128,17 @@ function terminarJuego() {
     });
   }
 }
-/////////////////////////////////////////////////
+
 
 function resetGame() {
   randomEmoji = createRandomArrayFromOther(emojisArr);
   randomEmojiPar = [...randomEmoji, ...randomEmoji];
   flippedCards = [];
   flippedElement = [];
-  puntuacion = 0;
+  score = 0;
   numberOfMatches = 0;
   timer = 0;
-  puntos.textContent = `Intentos:  ${puntuacion}`;
+  puntos.textContent = `Intentos:  ${score}`;
   segundos.textContent = `TIEMPO:  ${contadorMinutos} : ${contadorSegundos}`;
 
   setTimeout(
@@ -191,25 +150,14 @@ function resetGame() {
   );
 }
 
-//////////////HAY QUE DARLE ESTILOS/////////////////////
-//Lanzar un modal cuando termine el juego
 
-// function contarTiempo() {
-//   tiempoRegresivo = setInterval(() => {
-//     timer++;
-//     tiempo.textContent = `TIEMPO: ${timer}s`;
-//   }, 1000);
-// }
-
-//////////////HAY QUE DARLE ESTILOS/////////////////////
-//Lanzar un modal cuando termine el juego
 
 function endGame() {
   modal.setAttribute("id", "modal");
   modal.innerHTML = `
   <div>
   <h2>Fin del Juego</h2>
-  <p>INTENTOS: ${puntuacion} TIEMPO: ${
+  <p>INTENTOS: ${score} TIEMPO: ${
     "0" + contadorMinutos
   } : ${contadorSegundos}s</p>
   <button class="botonModal">Jugar de nuevo
@@ -224,8 +172,7 @@ function endGame() {
     resetGame();
   });
 }
-// botonModal.addEventListener("click", () => resetGame());
-////////////////////TIEMPO
+
 
 function inicioDeTiempo() {
   if (temporizador == false) {
@@ -260,6 +207,4 @@ function contarTiempo() {
   }, 1000);
 }
 
-//////////MODO NOCHE////////////////////
 
-botonNoche.addEventListener("change", (e) => body.classList.toggle("dark"));
