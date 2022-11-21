@@ -132,6 +132,7 @@ function endGame() {
 }
 
 
+
 function resetGame() {
   randomEmoji = createRandomArrayFromOther(emojisArr);
   randomEmojiPar = [...randomEmoji, ...randomEmoji];
