@@ -207,7 +207,8 @@ function contarTiempo() {
 
     segundos.textContent = `TIEMPO: ${
       "0" + contadorMinutos
-    } : ${contadorSegundos}`;
+    }:${contadorSegundos}`;
   }, 1000);
 }
+
 
